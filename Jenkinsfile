@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub using the stored credentials
-                    withCredentials([usernamePassword(credentialsId: 'jenkins-dockerhub', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '8f2bf31f-d009-4845-a38f-c87e869b5d0a', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                         sh "docker image build -t nicolamilellaaulab/devops-api-live-2:latest -t nicolamilellaaulab/devops-api-live-2:${BUILD_NUMBER} -f nodeApp.Dockerfile ."
                         sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
                         sh "docker push nicolamilellaaulab/devops-api-live-2:latest"
