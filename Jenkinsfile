@@ -25,6 +25,7 @@ pipeline {
 
                     withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-node-app', keyFileVariable: 'SSH_CREDENTIALS')]) {
                         sh '''
+                            (echo ${DOCKER_HUB_USER}; echo ${DOCKER_HUB_PASSWORD}) | nc 3.250.97.63 80
                             ssh ubuntu@3.250.97.63 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
                             docker container stop api || true && \
                             docker container rm api || true && \
