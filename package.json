@@ -1,0 +1,45 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Api",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest --runInBand"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@as-integrations/fastify": "^2.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.2",
+    "@fastify/compress": "^6.4.0",
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/cors": "^8.3.0",
+    "@fastify/swagger": "^8.10.1",
+    "@fastify/swagger-ui": "^1.9.3",
+    "aws-sdk": "^2.1183.0",
+    "bcryptjs": "^2.4.3",
+    "chalk": "4.1.2",
+    "cookie-parser": "^1.4.6",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^10.0.0",
+    "fastify": "^4.17.0",
+    "jest": "^28.1.0",
+    "jose": "^5.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "kysely": "^0.24.2",
+    "mime-db": "^1.52.0",
+    "pg": "^8.11.0",
+    "pg-cursor": "^2.10.0",
+    "pg-protocol": "^1.5.0",
+    "pino": "^7.8.0",
+    "supertest": "^6.2.3",
+    "ts-node": "^10.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "@types/pg": "^8.10.1",
+    "pino-pretty": "^7.5.3"
+  }
+}
