@@ -23,7 +23,7 @@ pipeline {
                         sh "docker logout"
                     }
 
-                    withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-ssh', keyFileVariable: 'SSH_CREDENTIALS')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-node-app', keyFileVariable: 'SSH_CREDENTIALS')]) {
                         sh '''
                             ssh ubuntu@3.250.97.63 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
                             docker container stop api || true && \
