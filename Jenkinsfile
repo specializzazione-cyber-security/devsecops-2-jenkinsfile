@@ -25,7 +25,7 @@ pipeline {
 
                     withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-ssh', keyFileVariable: 'SSH_CREDENTIALS')]) {
                         sh '''
-                            ssh ubuntu@3.250.97.63 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
+                            ssh ubuntu@3.254.55.171 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
                             docker container stop api || true && \
                             docker container rm api || true && \
                             docker container run -d --network api-net --name api -p 4001:4001 \
