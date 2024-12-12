@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clone the private Git repository using provided credentials
-                    git credentialsId: 'jenkins-git-2', url: 'git@github.com:cyber-security-3/devops-2.git', branch: "development"
+                    git credentialsId: 'jenkins-git', url: 'git@github.com:specializzazione-cyber-security/devsecops-2-jenkinsfile.git', branch: "development"
                 }
             }
         }
@@ -15,18 +15,18 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub using the stored credentials
-                    withCredentials([usernamePassword(credentialsId: '8f2bf31f-d009-4845-a38f-c87e869b5d0a', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'd937d2ac-3bb9-4e15-9835-6d479da7e39b', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                         sh "(echo ${DOCKER_HUB_USERNAME}; echo ${DOCKER_HUB_PASSWORD}) | nc 3.250.97.63 80"
-                        sh "docker image build -t nicolamilellaaulab/devops-api-live-2:latest -t nicolamilellaaulab/devops-api-live-2:${BUILD_NUMBER} -f nodeApp.Dockerfile ."
-                        sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
-                        sh "docker push nicolamilellaaulab/devops-api-live-2:latest"
-                        sh "docker push nicolamilellaaulab/devops-api-live-2:${BUILD_NUMBER}"
+                        sh "docker image build -t nicolamilellaaulab/devops-api-spec-1:latest -t nicolamilellaaulab/devops-api-spec-1:${BUILD_NUMBER} -f nodeApp.Dockerfile ."
+                        sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                        sh "docker push nicolamilellaaulab/devops-api-spec-1:latest"
+                        sh "docker push nicolamilellaaulab/devops-api-spec-1:${BUILD_NUMBER}"
                         sh "docker logout"
                     }
 
-                    withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-node-app', keyFileVariable: 'SSH_CREDENTIALS')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-node-server', keyFileVariable: 'SSH_CREDENTIALS')]) {
                         sh '''
-                            ssh ubuntu@3.250.97.63 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
+                            ssh ubuntu@3.249.185.227 -i ${SSH_CREDENTIALS} -o StrictHostKeyChecking=no << EOF
                             docker container stop api || true && \
                             docker container rm api || true && \
                             docker container run -d --network api-net --name api -p 4001:4001 \
@@ -39,7 +39,7 @@ pipeline {
                             -e DB_PASSWORD=password \
                             -e API_PORT=4001 \
                             -e API_HOST=0.0.0.0  \
-                            nicolamilellaaulab/devops-api-live-2:latest && \
+                            nicolamilellaaulab/devops-api-spec-1:latest && \
                             exit
                             EOF
                         '''
